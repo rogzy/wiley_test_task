@@ -5,12 +5,13 @@ import lombok.experimental.FieldDefaults;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import web.elements.AbstractPage;
 import web.elements.ProductElement;
 
 import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SearchResultPage {
+public class SearchResultPage extends AbstractPage {
 
     WebDriver driver;
 
@@ -19,12 +20,11 @@ public class SearchResultPage {
 
     public SearchResultPage(WebDriver driver) {
         this.driver = driver;
-        sleep(2000);
-        driver.findElement(closeWindow).click();
+        sleep2o(driver, closeWindow).click();
     }
 
     public ProductElement getProduct(Integer id) {
-        WebElement product = driver.findElement(getXPath(id));
+        WebElement product = driver.findElement(getXPathProduct(id));
         return new ProductElement(driver, product);
     }
 
@@ -32,17 +32,7 @@ public class SearchResultPage {
         return driver.findElements(productList);
     }
 
-
-    private By getXPath(Integer id) {
+    private By getXPathProduct(Integer id) {
         return By.xpath("//div[@class='products-list']/section[" + id + "]");
-    }
-
-    //TODO kill me!
-    private void sleep(int i) {
-        try {
-            Thread.sleep(i);
-        } catch (InterruptedException e) {
-
-        }
     }
 }

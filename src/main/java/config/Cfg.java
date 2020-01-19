@@ -9,4 +9,7 @@ public interface Cfg extends Config {
 
     @DefaultValue("C:\\WebDrivers\\geckodriver.exe")
     String geckoDriver();
+
+    @DefaultValue("Java")
+    String textForSearch();
 }

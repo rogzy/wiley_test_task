@@ -9,18 +9,22 @@ import org.openqa.selenium.WebElement;
 import java.util.concurrent.TimeUnit;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SearchResultElement extends Element {
+public class SearchResultElement {
     By resultList = By.xpath("//aside[contains(@class, 'ui-widget')]/section/div/*");
 
-    public SearchResultElement(WebDriver driver, WebElement lastElement) {
-        super(driver, lastElement);
+    WebDriver driver;
+    WebElement parentElement;
+
+    public SearchResultElement(WebDriver driver, WebElement parentElement) {
+        this.driver = driver;
+        this.parentElement = parentElement;
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        if (!lastElement.findElement(resultList).isDisplayed()) {
+        if (!parentElement.findElement(resultList).isDisplayed()) {
             throw new RuntimeException("");
         }
     }
 
     public WebElement getResult() {
-        return lastElement.findElement(resultList);
+        return parentElement.findElement(resultList);
     }
 }

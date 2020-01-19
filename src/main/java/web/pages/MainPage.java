@@ -6,45 +6,41 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import web.elements.Element;
+import web.elements.AbstractPage;
 import web.elements.SearchResultElement;
 import web.elements.SubjectsElement;
 import web.elements.WhoWeServeElement;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MainPage {
+public class MainPage extends AbstractPage {
 
     WebDriver driver;
-
-    String header = "//main/header";
-    By body = By.xpath("//main/div[contains(@class, 'main-page-container')]");
-    By footer = By.xpath("//main/footer");
 
     By search = By.xpath("//input[@type='search']");
     By closeWindow = By.xpath("//form[@class='country-location-form']//button[@class='close']");
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
-
-        if (driver.getTitle().contains("Willey")) {
-            throw new RuntimeException("It is not ready!");
-        }
-        sleep(2000);
-        driver.findElement(closeWindow).click();
+        sleep2o(driver, closeWindow).click();
     }
 
     public WhoWeServeElement pointToTab(String name) {
-        WebElement currentTab = driver.findElement(By.xpath(getXPathTab(name)));
+        By xpath = By.xpath(getXPathSubMenu(name));
+        WebElement currentTab = driver.findElement(xpath);
         new Actions(driver).moveToElement(currentTab).perform();
-        sleep(2000);
         return new WhoWeServeElement(driver, currentTab);
     }
 
-    public SubjectsElement pointToTab2(String name) {
-        WebElement currentTab = driver.findElement(By.xpath(getXPathTab(name)));
+    public SubjectsElement pointToSubMenuWithSection(String name, String section) {
+        WebElement currentTab = driver.findElement(By.xpath(getXPathSubMenu(name)));
         new Actions(driver).moveToElement(currentTab).perform();
-        sleep(2000);
-        return new SubjectsElement(driver, currentTab);
+
+        By sectionXpath = By.xpath(getXPathSection(section));
+        sleep2o(driver, sectionXpath);
+        WebElement educationSection = driver.findElement(sectionXpath);
+
+        new Actions(driver).moveToElement(educationSection).perform();
+        return new SubjectsElement(driver, educationSection);
     }
 
     public SearchResultPage inputAndSubmitText(String text) {
@@ -61,16 +57,7 @@ public class MainPage {
         return new SearchResultElement(driver, input);
     }
 
-    //TODO kill me!
-    private void sleep(int i) {
-        try {
-            Thread.sleep(i);
-        } catch (InterruptedException e) {
 
-        }
-    }
 
-    private String getXPathTab(String tab) {
-        return "//a[contains(text(),'" + tab.toUpperCase() + "')]";
-    }
+
 }

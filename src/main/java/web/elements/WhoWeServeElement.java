@@ -11,14 +11,20 @@ import java.util.List;
 
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class WhoWeServeElement extends Element {
+public class WhoWeServeElement extends AbstractPage {
     By items = By.xpath("./parent::*/div/ul/li/a");
+    By hover = By.xpath("//li[@class='dropdown-submenu hover']");
 
-    public WhoWeServeElement(WebDriver driver, WebElement lastElement) {
-        super(driver, lastElement);
+    WebDriver driver;
+    WebElement parentElement;
+
+    public WhoWeServeElement(WebDriver driver, WebElement parentElement) {
+        this.driver = driver;
+        this.parentElement = parentElement;
+        sleep2o(driver, hover);
     }
 
     public List<WebElement> getItems() {
-        return lastElement.findElements(items);
+        return parentElement.findElements(items);
     }
 }
