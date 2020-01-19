@@ -14,9 +14,9 @@ repositories {
 }
 
 dependencies {
-    //junit
-    implementation 'org.junit.jupiter:junit-jupiter-api:5.+'
-    implementation 'org.junit.jupiter:junit-jupiter-engine:5.+'
+    //junit 5
+    implementation 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
 
     //webdriver
     implementation 'org.seleniumhq.selenium:selenium-java:3.+'
@@ -31,11 +31,19 @@ dependencies {
 
     //lombok
     implementation 'org.projectlombok:lombok:1.18.10'
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    //utils
+    implementation 'org.apache.commons:commons-lang3:3.9'
+    implementation 'commons-io:commons-io:2.6'
 }
 
 test {
     useJUnitPlatform() {
-        includeTags 'web'
+        
     }
 
 }

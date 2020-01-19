@@ -12,4 +12,13 @@ public interface Cfg extends Config {
 
     @DefaultValue("Java")
     String textForSearch();
+
+    @DefaultValue("https://www.wiley.com")
+    String wileyUrl();
+
+    @DefaultValue("https://www.httpbin.org/")
+    String delayUrl();
+
+    @DefaultValue("build/tmp/image.jpg")
+    String dirImage();
 }

@@ -32,8 +32,8 @@ public class WebTests {
     }
 
     @Test
-    @DisplayName("Items under Who We Serve for sub-header")
-    void checkItemsUnderSubHeader() {
+    @DisplayName("Проверка ")
+    void checkItemsSubMenu() {
         MainPage mainPage = new MainPage(driver);
         List<WebElement> tabItems = mainPage.pointToTab("Who We Serve").getItems();
         List<String> actualList = tabItems.stream().map(WebElement::getText).collect(toList());
@@ -50,7 +50,7 @@ public class WebTests {
 
     @Test
     @DisplayName("Search functionality")
-    void checkSearch() {
+    void checkResultSearch() {
         MainPage mainPage = new MainPage(driver);
         SearchResultPage searchResultPage = mainPage.inputAndSubmitText(cfg.textForSearch());
         for (int i = 1; i <= 10; i++) {
