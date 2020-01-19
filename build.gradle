@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+}
+
+group 'wiley_test_task'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //junit
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.+'
+    implementation 'org.junit.jupiter:junit-jupiter-engine:5.+'
+
+    //webdriver
+    implementation 'org.seleniumhq.selenium:selenium-java:3.+'
+    implementation 'org.seleniumhq.selenium:selenium-chrome-driver:3.+'
+    implementation 'org.seleniumhq.selenium:selenium-firefox-driver:3.+'
+
+    //config
+    implementation 'org.aeonbits.owner:owner:1.0.8'
+
+    //assertion
+    testCompile 'org.assertj:assertj-core:3.14.0'
+
+
+    //lombok
+    implementation 'org.projectlombok:lombok:1.18.10'
+}
+
+test {
+    useJUnitPlatform()
+
+}
+
