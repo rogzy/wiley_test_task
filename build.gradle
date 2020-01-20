@@ -37,10 +37,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     //utils
-    implementation 'org.apache.commons:commons-lang3:3.9'
     implementation 'commons-io:commons-io:2.6'
 
-    //guice
+    //dependency injection
     implementation 'com.google.inject:guice:4.2.2'
 
     // junit 5 Extension
@@ -49,10 +48,6 @@ dependencies {
 
 def setTestProperty(String prop, Object value) {
     test.systemProperty(prop, value)
-}
-
-def findProperty(String prop) {
-    return project.findProperty(prop) ?: "prop default value"
 }
 
 def findProperty(String prop, Object defaultValue) {

@@ -1,16 +1,5 @@
 package wiley_test_task;
 
-import api.aut.delay.DelayResponse;
-import api.aut.wiley.Page;
-import api.aut.wiley.Product;
-import api.aut.wiley.SearchResponse;
-import api.aut.wiley.Suggestion;
-import api.config.ApiCfg;
-import api.core.ApiModule;
-import api.retrofit.DelayRetrofit;
-import api.retrofit.AutStep;
-import api.retrofit.WileyRetrofit;
-
 import name.falgout.jeffrey.testing.junit.guice.IncludeModule;
 import org.apache.commons.io.FileUtils;
 import org.assertj.core.api.SoftAssertions;
@@ -18,6 +7,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import retrofit2.Response;
+import wiley_test_task.api.aut.delay.DelayResponse;
+import wiley_test_task.api.aut.wiley.Page;
+import wiley_test_task.api.aut.wiley.Product;
+import wiley_test_task.api.aut.wiley.SearchResponse;
+import wiley_test_task.api.aut.wiley.Suggestion;
+import wiley_test_task.api.config.ApiCfg;
+import wiley_test_task.api.core.ApiModule;
+import wiley_test_task.api.retrofit.AutStep;
+import wiley_test_task.api.retrofit.DelayRetrofit;
+import wiley_test_task.api.retrofit.WileyRetrofit;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -38,7 +37,7 @@ class ApiTests {
     void checkAttributes(ApiCfg cfg, AutStep autStep) throws IOException {
         String expectedTerm = "<span class=\"search-highlight\">java</span>";
         String expectedProduct = "<span class=\'search-highlight\'>Java</span>";
-        WileyRetrofit api = AutStep.createClient(cfg.wileyUrl(), WileyRetrofit.class);
+        WileyRetrofit api = autStep.createClient(cfg.wileyUrl(), WileyRetrofit.class);
         Response<SearchResponse> response = autStep.sendRequest(api.search(cfg.textForSearch()));
 
         SoftAssertions softly = new SoftAssertions();
@@ -79,7 +78,7 @@ class ApiTests {
     @DisplayName("Проверка таймаута")
     void checkDelay(ApiCfg cfg, AutStep autStep) {
         DelayResponse expected = new DelayResponse("https://www.httpbin.org/delay/1");
-        DelayRetrofit api = AutStep.createClient(cfg.delayUrl(), DelayRetrofit.class);
+        DelayRetrofit api = autStep.createClient(cfg.delayUrl(), DelayRetrofit.class);
         Response<DelayResponse> response = autStep.sendRequest(api.delay(1));
         assertThat(response.isSuccessful()).isTrue();
         assertThat(response.body()).isEqualTo(expected);

@@ -1,16 +1,16 @@
 package wiley_test_task;
 
-import api.retrofit.AutStep;
 import com.google.inject.Inject;
 import name.falgout.jeffrey.testing.junit.guice.IncludeModule;
-import web.config.WebCfg;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import web.core.WebModule;
-import web.pages.MainPage;
-import web.pages.SearchResultPage;
+import wiley_test_task.api.retrofit.AutStep;
+import wiley_test_task.web.config.WebCfg;
+import wiley_test_task.web.core.WebModule;
+import wiley_test_task.web.pages.MainPage;
+import wiley_test_task.web.pages.SearchResultPage;
 
 import java.util.Arrays;
 import java.util.List;
