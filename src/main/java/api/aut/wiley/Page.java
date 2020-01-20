@@ -1,4 +1,4 @@
-package api.response;
+package api.aut.wiley;
 
 import lombok.Getter;
 
@@ -9,5 +9,4 @@ public class Page {
     String title;
     String url;
     String content;
-
 }

@@ -18,6 +18,10 @@ public class SearchResultPage extends AbstractPage {
     By closeWindow = By.xpath("//form[@class='country-location-form']//button[@class='close']");
     By productList = By.xpath("//div[@class='products-list']/section");
 
+    By getXPathProduct(Integer id) {
+        return By.xpath("//div[@class='products-list']/section[" + id + "]");
+    }
+
     public SearchResultPage(WebDriver driver) {
         this.driver = driver;
         sleep2o(driver, closeWindow).click();
@@ -30,9 +34,5 @@ public class SearchResultPage extends AbstractPage {
 
     public List<WebElement> getProducts() {
         return driver.findElements(productList);
-    }
-
-    private By getXPathProduct(Integer id) {
-        return By.xpath("//div[@class='products-list']/section[" + id + "]");
     }
 }

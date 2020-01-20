@@ -19,9 +19,9 @@ dependencies {
     implementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
 
     //webdriver
-    implementation 'org.seleniumhq.selenium:selenium-java:3.+'
-    implementation 'org.seleniumhq.selenium:selenium-chrome-driver:3.+'
-    implementation 'org.seleniumhq.selenium:selenium-firefox-driver:3.+'
+    implementation 'org.seleniumhq.selenium:selenium-java:3.2.0'
+    implementation 'org.seleniumhq.selenium:selenium-chrome-driver:3.2.0'
+    implementation 'org.seleniumhq.selenium:selenium-firefox-driver:3.2.0'
 
     //config
     implementation 'org.aeonbits.owner:owner:1.0.8'
@@ -39,11 +39,42 @@ dependencies {
     //utils
     implementation 'org.apache.commons:commons-lang3:3.9'
     implementation 'commons-io:commons-io:2.6'
+
+    //guice
+    implementation 'com.google.inject:guice:4.2.2'
+
+    // junit 5 Extension
+    implementation 'name.falgout.jeffrey.testing.junit5:guice-extension:1.1.1'
+}
+
+def setTestProperty(String prop, Object value) {
+    test.systemProperty(prop, value)
+}
+
+def findProperty(String prop) {
+    return project.findProperty(prop) ?: "prop default value"
+}
+
+def findProperty(String prop, Object defaultValue) {
+    return project.findProperty(prop) ?: defaultValue
+}
+
+def setTestProperties() {
+    setTestProperty("junit.jupiter.execution.parallel.enabled", findProperty("ci.concurrent", false))
 }
 
 test {
+    setTestProperties()
     useJUnitPlatform() {
-        
+        def splitter = "&"
+        Object inclTags = findProperty('tags.include', false)
+        if (inclTags) {
+            includeTags inclTags.split(splitter)
+        }
+        Object exclTags = findProperty('tags.exclude', false)
+        if (exclTags) {
+            includeTags exclTags.split(splitter)
+        }
     }
 
 }

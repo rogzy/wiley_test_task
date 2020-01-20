@@ -1,8 +1,8 @@
-package config;
+package web.config;
 
 import org.aeonbits.owner.Config;
 
-public interface Cfg extends Config {
+public interface WebCfg extends Config {
 
     @DefaultValue("C:\\WebDrivers\\chromedriver.exe")
     String chromeDriver();
@@ -13,12 +13,6 @@ public interface Cfg extends Config {
     @DefaultValue("Java")
     String textForSearch();
 
-    @DefaultValue("https://www.wiley.com")
-    String wileyUrl();
-
-    @DefaultValue("https://www.httpbin.org/")
-    String delayUrl();
-
-    @DefaultValue("build/tmp/image.jpg")
-    String dirImage();
+    @DefaultValue("https://www.wiley.com/en-us")
+    String initUrl();
 }

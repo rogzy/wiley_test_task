@@ -1,18 +1,17 @@
 package web.elements;
 
-import lombok.AccessLevel;
-import lombok.experimental.FieldDefaults;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-@FieldDefaults(level = AccessLevel.PROTECTED)
+import java.time.Duration;
+
 public abstract class AbstractPage {
 
     protected WebElement sleep2o(WebDriver driver, By by) {
-        WebDriverWait wait = new WebDriverWait(driver, 2);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
         return driver.findElement(by);
     }

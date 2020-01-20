@@ -1,9 +1,7 @@
 package api.retrofit;
 
-import api.request.DelayRequest;
-import api.response.DelayResponse;
+import api.aut.delay.DelayResponse;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 

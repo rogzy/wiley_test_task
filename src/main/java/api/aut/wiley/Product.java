@@ -1,4 +1,4 @@
-package api.response;
+package api.aut.wiley;
 
 import lombok.Getter;
 
